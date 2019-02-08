@@ -13,7 +13,7 @@ namespace Test
             var film = new Films();
             film.Titre = "Felix";
 
-            Assert.AreEqual("Felix", film.Titre);
+            Assert.AreEqual("FELIX", film.Titre);
         }
 
         [TestMethod]
@@ -25,6 +25,18 @@ namespace Test
                 () => film.Titre = ""
                 );
         }
+
+        [TestMethod]
+        public void Le_Titre_Du_Film_Ne_Doit_Pas_Exeder_50_Caracteres()
+        {
+            var film = new Films();
+
+            Assert.ThrowsException<ArgumentException>(
+                () => film.Titre = ""
+                );
+        }
+
+
     }
     
 }

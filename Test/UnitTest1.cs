@@ -27,16 +27,45 @@ namespace Test
         }
 
         [TestMethod]
-        public void Le_Titre_Du_Film_Ne_Doit_Pas_Exeder_50_Caracteres()
+        public void Le_Titre_Du_Film_Ne_Peut_Pas_Avoir_Plus_De_50_Caracteres()
         {
             var film = new Films();
 
+            var exception = Assert.ThrowsException<ArgumentException>(
+            () => film.Titre = "fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+            );
+            Assert.AreEqual("Le titre saisi ne doit pas contenir plus de 50 caractères", exception.Message);
+        }
+
+        [TestMethod]
+        public void Le_Nom_De_La_Personne_Doit_S_Appeler_Felix()
+        {
+            var personne = new Personnes();
+            personne.Nom = "Felix";
+
+            Assert.AreEqual("FELIX", personne.Nom);
+        }
+
+        [TestMethod]
+        public void Le_Nom_De_La_Personne_Ne_Peut_Pas_Etre_Vide()
+        {
+            var personne = new Personnes();
+
             Assert.ThrowsException<ArgumentException>(
-                () => film.Titre = ""
+                () => personne.Nom = ""
                 );
         }
 
+        [TestMethod]
+        public void Le_Nom_De_La_Personne_Peut_Pas_Avoir_Plus_De_50_Caracteres()
+        {
+            var personne = new Personnes();
 
+            var exception = Assert.ThrowsException<ArgumentException>(
+            () => personne.Nom = "fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+            );
+            Assert.AreEqual("Le nom saisi ne doit pas contenir plus de 50 caractères", exception.Message);
+        }
     }
     
 }

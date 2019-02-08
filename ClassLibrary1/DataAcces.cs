@@ -44,5 +44,95 @@ namespace ClassLibrary1
             firstInsert.ExecuteNonQuery();
             connection.Close();
         }
+
+        private static void AfficherFilms()
+        {
+
+            SqlConnection connection = new SqlConnection(DataAcces.CHEMINBDD);
+            connection.Open();
+            SqlCommand selectCommand = connection.CreateCommand();
+            selectCommand.CommandText = "SELECT IdFilm, NomFilm,RealisateurFilm, ResumeFilm,GenreFilm,DureeFilm FROM Films ORDER BY NomFilm";
+
+            try
+            {
+                SqlDataReader dataReader = selectCommand.ExecuteReader();
+                if (!dataReader.HasRows)
+                {
+                    dataReader.Close();
+                    Console.WriteLine();
+                    Console.WriteLine("Oups pas de film trouvé!!!");
+                    Console.ReadKey(true);
+                    Console.Clear();
+                }
+                else
+                {
+                    while (dataReader.Read())
+                    {
+                        Console.WriteLine("Nom : " + dataReader[1]);
+                        Console.WriteLine("Réalisateur : " + dataReader[2]);
+                        Console.WriteLine("Résumé : " + dataReader[3]);
+                        Console.WriteLine("Genre : " + dataReader[4]);
+                        Console.WriteLine("Durée : " + dataReader[5]);
+                        Console.ReadKey(true);
+                        Console.WriteLine();
+                    }
+                    dataReader.Close();
+                    Console.Clear();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Une erreur est survenue: ", ex.Message);
+                Console.WriteLine("Veuillez recommencer...");
+                connection.Close();
+            }
+            connection.Close();
+        }
+        private static void AfficherPersonne()
+        {
+
+            SqlConnection connection = new SqlConnection(DataAcces.CHEMINBDD);
+            connection.Open();
+            SqlCommand selectCommand = connection.CreateCommand();
+            selectCommand.CommandText = "SELECT IdPersonne, NomPersonne,PrenomPersonne, DateNaissancePersonne,AdressePersonne,VillePersonne,CpPersonne,TaillePersonne,PoidsPersonne FROM Personnes ORDER BY NomPersonne";
+
+            try
+            {
+                SqlDataReader dataReader = selectCommand.ExecuteReader();
+                if (!dataReader.HasRows)
+                {
+                    dataReader.Close();
+                    Console.WriteLine();
+                    Console.WriteLine("Oups pas de personne trouvée!!!");
+                    Console.ReadKey(true);
+                    Console.Clear();
+                }
+                else
+                {
+                    while (dataReader.Read())
+                    {
+                        Console.WriteLine("Nom : " + dataReader[1]);
+                        Console.WriteLine("Prénom : " + dataReader[2]);
+                        Console.WriteLine("DateNaissance : " + dataReader[3]);
+                        Console.WriteLine("AdressePersonne : " + dataReader[4]);
+                        Console.WriteLine("VillePersonne : " + dataReader[5]);
+                        Console.WriteLine("CpPersonne : " + dataReader[6]);
+                        Console.WriteLine("TaillePersonne : " + dataReader[7]);
+                        Console.WriteLine("PoidsPersonne : " + dataReader[8]);
+                        Console.ReadKey(true);
+                        Console.WriteLine();
+                    }
+                    dataReader.Close();
+                    Console.Clear();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Une erreur est survenue: ", ex.Message);
+                Console.WriteLine("Veuillez recommencer...");
+                connection.Close();
+            }
+            connection.Close();
+        }
     }
 }

@@ -19,9 +19,40 @@ namespace ClassLibrary1
         public Films()
         {
         }
+        public string Titre
+        {
+            get => titre.ToUpper();
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("Le titre ne peut pas être vide");
+                }
+                if (value.Length > 50)
+                {
+                    throw new ArgumentException("Le titre saisi ne doit pas contenir plus de 50 caractères");
+                }
+                titre = value;
 
-        public string Titre { get => titre; set => titre = value; }
-        public string Realisateur { get => realisateur; set => realisateur = value; }
+            }
+        }
+        public string Realisateur
+        {
+            get => realisateur.ToUpper();
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("Le nom du réalisateur ne peut pas être vide");
+                }
+                if (value.Length > 50)
+                {
+                    throw new ArgumentException("Le nom du réalisateur ne doit pas contenir plus de 50 caractères");
+                }
+                realisateur = value;
+
+            }
+        }
         public DateTime DateSortie { get => dateSortie; set => dateSortie = value; }
         public string Resume { get => resume; set => resume = value; }
         public int Duree { get => duree; set => duree = value; }

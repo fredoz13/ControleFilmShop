@@ -14,14 +14,14 @@ namespace ClassLibrary1
         private string adresse;
         private string cp;
         private string ville;
-        private string taille;
-        private string poids;
+        private int taille;
+        private int poids;
 
         public Personnes()
         {
         }
 
-        public Personnes(string nom, string prenom, DateTime dateNaissance, string adresse, string cp, string taille, string poids, string ville)
+        public Personnes(string nom, string prenom, DateTime dateNaissance, string adresse, string cp, int taille, int poids, string ville)
         {
             Nom = nom;
             Prenom = prenom;
@@ -33,13 +33,45 @@ namespace ClassLibrary1
             Ville = ville;
         }
 
-        public string Nom { get => nom; set => nom = value; }
-        public string Prenom { get => prenom; set => prenom = value; }
+        public string Nom
+        {
+            get => nom.ToUpper();
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("Le nom ne peut pas être vide");
+                }
+                if (value.Length > 50)
+                {
+                    throw new ArgumentException("Le nom saisi ne doit pas contenir plus de 50 caractères");
+                }
+                nom = value;
+
+            }
+        }
+        public string Prenom
+        {
+            get => prenom;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentException("Le nom ne peut pas être vide");
+                }
+                if (value.Length > 50)
+                {
+                    throw new ArgumentException("Le nom saisi ne doit pas contenir plus de 50 caractères");
+                }
+                prenom = value;
+
+            }
+        }
         public DateTime DateNaissance { get => dateNaissance; set => dateNaissance = value; }
         public string Adresse { get => adresse; set => adresse = value; }
         public string Cp { get => cp; set => cp = value; }
-        public string Taille { get => taille; set => taille = value; }
-        public string Poids { get => poids; set => poids = value; }
+
+
         public string NomComplet { get => Prenom + " " + Nom; }
         public int Age
         {
@@ -63,6 +95,8 @@ namespace ClassLibrary1
         }
 
         public string Ville { get => ville; set => ville = value; }
+        public int Taille { get => taille; set => taille = value; }
+        public int Poids { get => poids; set => poids = value; }
 
         public string SePresenter()
         {
